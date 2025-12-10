@@ -31,7 +31,7 @@ export default function App() {
       </div>
       <div className='col-span-4 text-left row-start-3'>
         <div className='flex flex-row items-center mb-2'>
-          <span className='flex-1'>KW {getCalendarWeek(day)}</span>
+          <span className='flex-1'>Week {getCalendarWeek(day)}</span>
           <div>
             <button onClick={prevDay} className='size-14'>{"<"}</button>
             <button onClick={nextDay} className='size-14'>{">"}</button>
