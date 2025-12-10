@@ -12,6 +12,7 @@ export default function usePromptSubmission(
 
   return {
     submit(event: React.FormEvent) {
+      console.log("Submitting prompt...");
       event.preventDefault();
       const form = event.target as HTMLFormElement;
       const input = form.querySelector(
@@ -30,12 +31,14 @@ export default function usePromptSubmission(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           return parseJsonNdStream(data, (obj: any) => {
             if (obj) {
-              newEventCb({
+              const newEvent ={
                 id: obj.id,
                 title: obj.title,
                 start: new Date(obj.start),
                 end: new Date(obj.end),
-              });
+              }
+              console.log(newEvent)
+              newEventCb(newEvent);
             }
          }, (allItems: string[]) => {
           if(allItems.length > 0){

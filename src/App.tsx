@@ -1,3 +1,4 @@
+import Calendar from './features/Calendar';
 import useCalendarDayView from './hooks/useCalendarDayView';
 import useEvents from './hooks/useEvents';
 import usePromptSubmission from './hooks/usePromptSubmission';
@@ -6,7 +7,7 @@ import { getCalendarWeek } from './utils';
 
 export default function App() {
   const { day, nextDay, prevDay } = useCalendarDayView();
-  const {events, insertEvent} = useEvents();
+  const {insertEvent} = useEvents();
   const { submit, loading } = usePromptSubmission(insertEvent);
 
   return (
@@ -18,16 +19,7 @@ export default function App() {
       </div>
       <div className='col-span-4 row-start-2 overflow-y-auto'>
         {day.toDateString()}
-    
-        {events.map((event, index) => (
-          <div key={index}>
-            <h3>{event.title}</h3>
-
-            <p>
-              {new Date(event.start).toLocaleTimeString()} - {new Date(event.end).toLocaleTimeString()}
-            </p>
-          </div>
-        ))}
+        <Calendar />
       </div>
       <div className='col-span-4 text-left row-start-3'>
         <div className='flex flex-row items-center mb-2'>
