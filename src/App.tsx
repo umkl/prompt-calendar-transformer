@@ -6,8 +6,8 @@ import { getCalendarWeek } from './utils';
 
 export default function App() {
   const { day, nextDay, prevDay } = useCalendarDayView();
-  const {events, insertEvent: insertEvents} = useEvents();
-  const { submit, loading } = usePromptSubmission(insertEvents);
+  const {events, insertEvent} = useEvents();
+  const { submit, loading } = usePromptSubmission(insertEvent);
 
   return (
     <div className='h-svh box-border p-4 w-full grid grid-cols-4 grid-rows-[auto_1fr_auto]'>
@@ -16,12 +16,13 @@ export default function App() {
           <p>Prompt Calendar Transformer</p>
         </div>
       </div>
-      <div className='col-span-4 row-start-2'>
+      <div className='col-span-4 row-start-2 overflow-y-auto'>
         {day.toDateString()}
-        {events.filter(x=>day.getDate() === x.start.getDate() || day.getDate() === x.end.getDate()).map((event, index) => (
+    
+        {events.map((event, index) => (
           <div key={index}>
             <h3>{event.title}</h3>
-            <p>{event.id}</p>
+
             <p>
               {new Date(event.start).toLocaleTimeString()} - {new Date(event.end).toLocaleTimeString()}
             </p>
