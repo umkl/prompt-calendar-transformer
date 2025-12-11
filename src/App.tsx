@@ -1,3 +1,4 @@
+import { Input } from './comps/ui/input';
 import Calendar from './features/Calendar';
 import useCalendarDayView from './hooks/useCalendarDayView';
 import useEvents from './hooks/useEvents';
@@ -30,7 +31,7 @@ export default function App() {
           </div>
         </div>
         <form className='flex flex-row gap-4' onSubmit={submit}>
-          <input type="text" className='flex-1' placeholder='What do you want to do today?' />
+          <Input type="text" className='flex-1' placeholder='What do you want to do today?' />
           <button type='submit' disabled={loading}>{loading ? 'loading': 'generate'}</button>
         </form>
       </div>
