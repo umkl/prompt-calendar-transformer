@@ -20,7 +20,7 @@ export default function App() {
       </div>
       <div className='col-span-4 row-start-2 overflow-y-auto'>
         {day.toDateString()}
-        <Calendar />
+        <Calendar highlightedDay={day} />
       </div>
       <div className='col-span-4 text-left row-start-3'>
         <div className='flex flex-row items-center mb-2'>
