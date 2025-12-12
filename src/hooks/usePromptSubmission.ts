@@ -18,6 +18,9 @@ export default function usePromptSubmission(
       const input = form.querySelector(
         'input[type="text"]'
       ) as HTMLInputElement;
+      if(input.value === ''){
+        return;
+      }
       const prompt = input.value;
       input.value = "";
       setLoading(true);
