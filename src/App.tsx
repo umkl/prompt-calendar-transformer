@@ -1,4 +1,4 @@
-import { SaveIcon, StarsIcon } from 'lucide-react';
+import { StarsIcon } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { BookmarkSquareIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
 import { persistKey } from './const/local-storage';
@@ -7,7 +7,7 @@ import useCalendarDayView from './hooks/useCalendarDayView';
 import useEvents from './hooks/useEvents';
 import usePromptSubmission from './hooks/usePromptSubmission';
 import { storeObjectInLocalStorage } from './repo/local-storage';
-import './styles/App.css'
+import './styles/App.css';
 import { getCalendarWeek } from './utils';
 
 export default function App() {

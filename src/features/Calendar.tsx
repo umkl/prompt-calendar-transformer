@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import useEvents from "../hooks/useEvents";
 import { DnDCalendar } from "../comps/dnd-calendar";
-import { Button } from "../components/ui/button";
 
 export default function Calendar(props: {highlightedDay: Date}) {
   const {events} = useEvents(); 
