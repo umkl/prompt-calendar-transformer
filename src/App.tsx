@@ -1,14 +1,16 @@
 import { Input } from './comps/ui/input';
+import { persistKey } from './const/local-storage';
 import Calendar from './features/Calendar';
 import useCalendarDayView from './hooks/useCalendarDayView';
 import useEvents from './hooks/useEvents';
 import usePromptSubmission from './hooks/usePromptSubmission';
+import { storeObjectInLocalStorage } from './repo/local-storage';
 import './styles/App.css'
 import { getCalendarWeek } from './utils';
 
 export default function App() {
   const { day, nextDay, prevDay } = useCalendarDayView();
-  const {insertEvent} = useEvents();
+  const {events, insertEvent} = useEvents();
   const { submit, loading } = usePromptSubmission(insertEvent, day);
 
   return (
@@ -33,6 +35,10 @@ export default function App() {
         <form className='flex flex-row gap-4' onSubmit={submit}>
           <Input type="text" className='flex-1' placeholder='What do you want to do today?' />
           <button type='submit' disabled={loading}>{loading ? 'loading': 'generate'}</button>
+          <button onClick={()=>{
+            console.log("persist");
+            storeObjectInLocalStorage(persistKey, events);
+          }}>persist</button>
         </form>
       </div>
     </div>

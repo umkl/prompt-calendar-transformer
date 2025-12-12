@@ -31,3 +31,15 @@ export function pushItemToMapInLocalStorage(key: string, itemKey: string, itemVa
   map.set(itemKey, itemValue);
   storeMapToLocalStorage(key, map);
 }
+
+export function storeObjectInLocalStorage(key: string, obj: object): void {
+  localStorage.setItem(key, JSON.stringify(obj));
+}
+
+export function retrieveObjectFromLocalStorage<T extends object>(key: string): T {
+  const localStorageContent = localStorage.getItem(key);
+  if (!localStorageContent) {
+    throw new Error("No data found in localStorage for key: " + key);
+  }
+  return JSON.parse(localStorageContent) as T;
+}
