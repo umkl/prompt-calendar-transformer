@@ -20,7 +20,7 @@ export default function App() {
           <p>Prompt Calendar Transformer</p>
         </div>
       </div>
-      <div className='col-span-4 row-start-2 overflow-y-auto'>
+      <div className='col-span-4 row-start-2 overflow-y-auto hide-scrollbar'>
         {day.toDateString()}
         <Calendar highlightedDay={day} />
       </div>

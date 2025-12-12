@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import useEvents from "../hooks/useEvents";
+import { DnDCalendar } from "../comps/dnd-calendar";
 
 export default function Calendar(props: {highlightedDay: Date}) {
   const {events} = useEvents(); 
@@ -11,14 +12,10 @@ export default function Calendar(props: {highlightedDay: Date}) {
     });
   }, [props.highlightedDay, events]);
 
-  return <div className='h-full w-full' >
-    {filteredEvents.map((event, index) => (
-      <div key={index}>
-        <h3>{event.title}</h3>
-        <p>
-          {new Date(event.start).toLocaleTimeString()} - {new Date(event.end).toLocaleTimeString()}
-        </p>
-      </div>
-    ))}
+  return <div className='h-full w-full'>
+    <DnDCalendar events={filteredEvents} onEventMove={function (eventId: string, newStart: Date): void {
+      // throw new Error("Function not implemented.");
+      console.log("Event moved:", eventId, newStart);
+    } }/>
   </div>
 }
