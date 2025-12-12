@@ -6,13 +6,13 @@ import { mapKey } from "../const/local-storage";
 
 
 export default function usePromptSubmission(
-  newEventCb: (events: pct.Event) => void
+  newEventCb: (events: pct.Event) => void,
+  date: Date
 ) {
   const [loading, setLoading] = useState(false);
 
   return {
     submit(event: React.FormEvent) {
-      console.log("Submitting prompt...");
       event.preventDefault();
       const form = event.target as HTMLFormElement;
       const input = form.querySelector(
@@ -31,13 +31,14 @@ export default function usePromptSubmission(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           return parseJsonNdStream(data, (obj: any) => {
             if (obj) {
-              const newEvent ={
+                const newEvent ={
                 id: obj.id,
                 title: obj.title,
-                start: new Date(obj.start),
-                end: new Date(obj.end),
-              }
-              console.log(newEvent)
+                start: new Date(new Date(date).toDateString() + ' ' + new Date(obj.start).toTimeString()),
+                end: new Date(new Date(date).toDateString() + ' ' + new Date(obj.end).toTimeString()),
+                }
+
+                console.log(newEvent);
               newEventCb(newEvent);
             }
          }, (allItems: string[]) => {

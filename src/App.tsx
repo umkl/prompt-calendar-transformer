@@ -9,7 +9,7 @@ import { getCalendarWeek } from './utils';
 export default function App() {
   const { day, nextDay, prevDay } = useCalendarDayView();
   const {insertEvent} = useEvents();
-  const { submit, loading } = usePromptSubmission(insertEvent);
+  const { submit, loading } = usePromptSubmission(insertEvent, day);
 
   return (
     <div className='h-svh box-border p-4 w-full grid grid-cols-4 grid-rows-[auto_1fr_auto]'>
