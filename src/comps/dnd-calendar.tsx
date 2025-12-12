@@ -7,9 +7,10 @@ import { useState, useRef, useEffect } from "react"
 interface DnDCalendarProps {
   events: pct.Event[]
   onEventMove: (eventId: string, newStart: Date) => void
+  onFirstLoaded: (firstElement: HTMLDivElement) => void
 }
 
-export function DnDCalendar({ events, onEventMove }: DnDCalendarProps) {
+export function DnDCalendar({ events, onEventMove, onFirstLoaded }: DnDCalendarProps) {
   const [draggedEventId, setDraggedEventId] = useState<string | null>(null)
   const [dropIndicatorTime, setDropIndicatorTime] = useState<Date | null>(null)
   const [touchOffset, setTouchOffset] = useState<number>(0)
@@ -18,6 +19,17 @@ export function DnDCalendar({ events, onEventMove }: DnDCalendarProps) {
   const startHour = 6
   const endHour = 22
   const totalHours = endHour - startHour
+
+  useEffect(()=>{
+    console.log("Events changed:", events.length);
+    if(events.length > 0 && calendarRef.current){
+      const firstElement = calendarRef.current.querySelector<HTMLDivElement>(`[data-event-id="${events[0].id}"]`);
+      if(firstElement){
+        console.log("First element found:", firstElement);
+        onFirstLoaded(firstElement);
+      }
+    }
+  }, [events, onFirstLoaded]);
 
   // Generate time markers for every 15 minutes
   const timeMarkers: Date[] = []
@@ -184,6 +196,7 @@ export function DnDCalendar({ events, onEventMove }: DnDCalendarProps) {
               top: `${top}%`,
               height: `${height}%`,
             }}
+            data-event-id={event.id}
             onMouseDown={(e) => handleMouseDown(event.id, e)}
             onTouchStart={(e) => handleTouchStart(event.id, e)}
           >

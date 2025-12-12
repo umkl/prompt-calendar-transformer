@@ -21,7 +21,6 @@ export default function App() {
         </div>
       </div>
       <div className='col-span-4 row-start-2 overflow-y-auto hide-scrollbar'>
-        {day.toDateString()}
         <Calendar highlightedDay={day} />
       </div>
       <div className='col-span-4 text-left row-start-3'>
