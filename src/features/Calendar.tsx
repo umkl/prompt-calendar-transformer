@@ -11,8 +11,8 @@ export default function Calendar(props: {highlightedDay: Date}) {
     });
   }, [props.highlightedDay, events]);
 
-  return <div className='h-full w-full' >
-    <p className="mb-4">{props.highlightedDay.toDateString()}</p>
+  return <div className='h-full w-full overflow-visible'>
+    <div className="h-[10px]"></div>
     <DnDCalendar events={filteredEvents} onFirstLoaded={
       function(firstElement: HTMLDivElement): void {
         console.log("Scrolling to first element:", firstElement);

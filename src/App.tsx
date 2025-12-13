@@ -9,6 +9,7 @@ import usePromptSubmission from './hooks/usePromptSubmission';
 import { storeObjectInLocalStorage } from './repo/local-storage';
 import './styles/App.css';
 import { getCalendarWeek } from './utils';
+import { IOSLoader } from './comps/loading';
 
 export default function App() {
   const { day, nextDay, prevDay } = useCalendarDayView();
@@ -20,20 +21,26 @@ export default function App() {
       <div className='row-start-1 col-span-4 grid-cols-subgrid grid '>
         <div className='col-span-4 bg-secondary rounded-2xl p-4 text-left text-2xl flex flex-row justify-between items-center'>
           <p className='font-bold'>Prompt Calendar Transformer</p>
-          <p className='font-semibold text-muted-foreground text-base'>Model: gemini-2.0-flash</p>
+          <div className='text-right'>
+            <p className='font-medium text-muted-foreground text-base'>Model: gemini-2.0-flash</p>
+            <p className='font-medium text-muted-foreground text-base'>Version:  {__APP_VERSION__}</p>
+          </div>
         </div>
       </div>
       <div className='col-span-4 row-start-2 py-4 overflow-hidden'>
-        <div className='overflow-y-scroll h-full hide-scrollbar bg-secondary rounded-xl p-4'>
-          <div className='flex flex-row items-center mb-2 sticky top-0 z-50'>
-            <span className='flex-1'>Week {getCalendarWeek(day)}</span>
+        <div className='overflow-hidden h-full flex flex-col bg-secondary rounded-xl p-4'>
+          <div className='flex flex-row items-center justify-between mb-2 z-50'>
+            <span className=' text-2xl font-semibold text-secondary-foreground'>W {getCalendarWeek(day)}</span>
+            <p className='text-xl'>{day.toDateString()}</p>
             <div className='flex gap-2'>
-              <Button onClick={prevDay} 
-              size={"icon-lg"}><ChevronLeftIcon/></Button>
+              <Button onClick={prevDay} size={"icon-lg"}><ChevronLeftIcon/></Button>
               <Button onClick={nextDay} size={"icon-lg"}><ChevronRightIcon/></Button>
             </div>
           </div>
+          
+          <div className='h-full overflow-scroll hide-scrollbar'>
             <Calendar highlightedDay={day} />
+          </div>
         </div>
       </div>
       <div className='col-span-4 text-left row-start-3'>
@@ -51,7 +58,7 @@ export default function App() {
               </Button>
             <Button type='submit' disabled={loading}>
               {loading ? 'loading': 'generate'}
-              <StarsIcon fill=''/>
+              {loading ? <IOSLoader size="md"/> :<StarsIcon fill=''/>}
               </Button>
           </div>
         </form>

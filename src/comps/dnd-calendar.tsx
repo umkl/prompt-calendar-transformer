@@ -202,7 +202,7 @@ export function DnDCalendar({ events, onEventMove, onFirstLoaded }: DnDCalendarP
           >
             <div className="h-full rounded-md bg-primary px-3 py-2 text-primary-foreground shadow-sm">
               <div className="flex h-full flex-col justify-between">
-                <div className="font-medium leading-tight">{event.title}</div>
+                <div className="font-medium leading-tight text-sm">{event.title}</div>
                 <div className="text-xs opacity-90">
                   {formatTime(event.start)} • {formatDuration(event.start, event.end)}
                 </div>
