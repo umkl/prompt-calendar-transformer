@@ -44,18 +44,19 @@ export default function App() {
       <div className='col-span-4 text-left row-start-3'>
        
         <form className='bg-secondary rounded-2xl p-4 flex flex-col gap-2 focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]' onSubmit={submit}>
-          <input type="text" className='flex-1 appearance-none outline-none' placeholder='What do you want to do today?' ></input>
+          <input type="text" className='flex-1 appearance-none outline-none' placeholder='What do you want to do today?'/>
           <div className='flex gap-2 justify-end'>
-            <Button 
+            <Button
+              type="button" 
               disabled={isLocalStorageStale}
               onClick={persistInLocalStorageAction}>
               {isLocalStorageStale ? 'save changes' : 'all changes saved'}
               <BookmarkSquareIcon fontVariant={'filled'}/>
-              </Button>
+            </Button>
             <Button type='submit' disabled={loading}>
               {loading ? 'loading': 'generate'}
               {loading ? <IOSLoader/> :<StarsIcon fill=''/>}
-              </Button>
+            </Button>
           </div>
         </form>
       </div>

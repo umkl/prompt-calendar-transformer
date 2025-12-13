@@ -10,7 +10,6 @@ export default function useEvents() {
     const url = new URL(window.location.href);
     const slugCalendarId: string | undefined  = url.pathname;
     if (!slugCalendarId || slugCalendarId === "/"){
-      // localstorage persistence
       try {
         const persistedData = retrieveObjectFromLocalStorage<pct.Event[]>(persistKey);
         if(persistedData instanceof Array){
@@ -18,11 +17,11 @@ export default function useEvents() {
             return parseObjectToEvent(event as unknown) as pct.Event;
           }));
         }
-      }catch(e: Error | unknown){
-        console.error("No persisted data found in localStorage", e);
+      }catch{
+        return;
       }
     }
-  }, []);
+  });
 
   const [isLocalStorageStale, setIsLocalStorageStale] = useContext(EventProviderContext).isLocalStorageStaleState;
 
