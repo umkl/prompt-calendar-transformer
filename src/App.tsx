@@ -1,19 +1,17 @@
 import { StarsIcon } from 'lucide-react';
-import { Button } from './components/ui/button';
+import { Button } from './comps/ui/button';
 import { BookmarkSquareIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
-import { persistKey } from './const/local-storage';
 import Calendar from './features/Calendar';
 import useCalendarDayView from './hooks/useCalendarDayView';
 import useEvents from './hooks/useEvents';
 import usePromptSubmission from './hooks/usePromptSubmission';
-import { storeObjectInLocalStorage } from './repo/local-storage';
 import './styles/App.css';
 import { getCalendarWeek } from './utils';
 import { IOSLoader } from './comps/loading';
 
 export default function App() {
   const { day, nextDay, prevDay } = useCalendarDayView();
-  const {events, insertEvent} = useEvents();
+  const {insertEvent,isLocalStorageStale, persistInLocalStorageAction} = useEvents();
   const { submit, loading } = usePromptSubmission(insertEvent, day);
 
   return (
@@ -49,11 +47,9 @@ export default function App() {
           <input className='flex-1 appearance-none outline-none' placeholder='What do you want to do today?' ></input>
           <div className='flex gap-2 justify-end'>
             <Button 
-              onClick={()=>{
-              console.log("persist");
-              storeObjectInLocalStorage(persistKey, events);
-            }}>
-              persist
+              disabled={isLocalStorageStale}
+              onClick={persistInLocalStorageAction}>
+              {isLocalStorageStale ? 'save changes' : 'all changes saved'}
               <BookmarkSquareIcon fontVariant={'filled'}/>
               </Button>
             <Button type='submit' disabled={loading}>
