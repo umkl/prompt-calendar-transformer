@@ -1,0 +1,27 @@
+
+/* iOS Loader Styles */
+.ios-loader {
+  position: relative;
+  display: inline-block;
+}
+
+.ios-loader-bar {
+  position: absolute;
+  width: 10%;
+  height: 26%;
+  left: 45%;
+  top: 37%;
+  background-color: currentColor;
+  opacity: 0;
+  border-radius: 50px;
+  animation: ios-loader-fade 1.2s linear infinite;
+}
+
+@keyframes ios-loader-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}

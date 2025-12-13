@@ -44,7 +44,7 @@ export default function App() {
       <div className='col-span-4 text-left row-start-3'>
        
         <form className='bg-secondary rounded-2xl p-4 flex flex-col gap-2 focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]' onSubmit={submit}>
-          <input className='flex-1 appearance-none outline-none' placeholder='What do you want to do today?' ></input>
+          <input type="text" className='flex-1 appearance-none outline-none' placeholder='What do you want to do today?' ></input>
           <div className='flex gap-2 justify-end'>
             <Button 
               disabled={isLocalStorageStale}
@@ -54,7 +54,7 @@ export default function App() {
               </Button>
             <Button type='submit' disabled={loading}>
               {loading ? 'loading': 'generate'}
-              {loading ? <IOSLoader size="md"/> :<StarsIcon fill=''/>}
+              {loading ? <IOSLoader/> :<StarsIcon fill=''/>}
               </Button>
           </div>
         </form>
